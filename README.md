@@ -3,11 +3,15 @@
 This project was created basically for studying purposes.
 
 ## Project structure
-- Backend (Node.js)
+- Backend/API (Node.js with Express and Typescript)
 - Frontend (React with Typescript)
 
-## Available Scripts
+## Requirements
+- Install dependencies
+- Create environment file (.env)
 
+
+## Available Scripts
 In the project directory, you can run:
 
 ### `yarn start`
