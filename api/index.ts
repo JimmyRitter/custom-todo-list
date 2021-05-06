@@ -1,9 +1,9 @@
-const express = require('express');
+import express from 'express';
 const app = express();
 const port = 3001;
 
-app.get('/', (req, res) => {
-    res.send('Hello World!');
+app.get('/', (req: any, res: any) => {
+    res.send('Hello from API');
 });
 
 app.listen(port, () => {

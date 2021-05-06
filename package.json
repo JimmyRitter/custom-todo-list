@@ -5,12 +5,12 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "yarn workspace backend start & yarn workspace frontend start",
+    "start": "yarn workspace api start & yarn workspace frontend start",
     "build-ui": "yarn workspace frontend build"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "private": true,
-  "workspaces": ["backend", "frontend"]
+  "workspaces": ["api", "frontend"]
 }
