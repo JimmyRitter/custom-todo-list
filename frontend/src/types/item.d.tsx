@@ -1,5 +1,5 @@
 declare interface Item {
-    id: number;
+    _id: string;
     name: string;
     checked: boolean;
 }

@@ -28,10 +28,9 @@ export class ItemList extends React.Component<{}, { items: any }> {
             <>
                 <h2>Items from backend:</h2>
                 {items.map((item: Item) => (
-                    <span key={item.id}>{item.name}</span>
+                    <span key={item._id}>{item.name}</span>
                 ))}
             </>
         )
     }
-
 }

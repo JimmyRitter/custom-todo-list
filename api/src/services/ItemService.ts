@@ -1,19 +1,23 @@
 import { Item } from "../types";
+import { Request, Response } from 'express';
+import { Db } from "mongodb";
 
-const items: Item[] = [{
-    id: 1,
-    name: 'first item',
-    checked: true,
-}, {
-    id: 2,
-    name: 'second item',
-    checked: false
-}];
-
-export const getItems = (req: any, res: any) => {
-    res.send(items);
+export const getItems = (req: Request, res: Response) => {
+    const db: Db = req.app.locals.mongoDBTodoList;
+    db.collection('items')
+        .find()
+        .toArray()
+        .then((result: Item[]) => {
+            res.send(result);
+        });
 };
 
-export const getItem = (req: any, res: any) => {
-    res.send(items.filter((x) => x.id === parseInt(req.params.id)));
+export const getItem = (req: Request, res: Response) => {
+    const db: Db = req.app.locals.mongoDBTodoList;
+    db.collection('items')
+        .find({ "name": "second item" })
+        .toArray()
+        .then((result: Item[]) => {
+            res.send(result);
+        });
 };
