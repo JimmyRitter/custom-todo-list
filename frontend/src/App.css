@@ -1,3 +1,24 @@
+.item-row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+.checked-item {
+  text-decoration: line-through;
+}
+
+.remove-icon {
+  display: none;
+  max-height: 4%;
+  max-width: 4%;
+}
+
+.item-row *:hover + .remove-icon {
+  display: block;
+}
+
 .App {
   text-align: center;
 }

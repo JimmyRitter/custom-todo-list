@@ -1,7 +1,7 @@
-declare interface Item {
+declare interface ItemModel {
     _id: string;
     name: string;
     checked: boolean;
 }
 
-export default Item;
+export default ItemModel;
