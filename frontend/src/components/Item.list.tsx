@@ -1,9 +1,10 @@
 import React from "react";
 import { AxiosRequestConfig } from "axios";
 import axios from 'axios';
-import Item from "../types/item.d";
+import ItemModel from "../types/item.d";
+import Item from './item.single';
 
-export class ItemList extends React.Component<{}, { items: any }> {
+export class ItemList extends React.Component<{}, { items: ItemModel[] }> {
     constructor(props: any) {
         super(props);
         this.state = {
@@ -26,11 +27,16 @@ export class ItemList extends React.Component<{}, { items: any }> {
         const { items } = this.state;
         return (
             <>
-                <h2>Items from backend:</h2>
-                {items.map((item: Item) => (
-                    <span key={item._id}>{item.name}</span>
+                <h2>To do list:</h2>
+                {items.map((item: ItemModel) => (
+                    <Item key={item._id}
+                          _id={item._id}
+                          name={item.name}
+                          checked={item.checked}
+                    />
                 ))}
             </>
         )
     }
+
 }
