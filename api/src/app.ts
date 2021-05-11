@@ -8,6 +8,7 @@ dotenv.config({ path: `${__dirname}/../.env.${process.env.NODE_ENV}` });
 
 const app = express();
 app.use(cors());
+app.use(express.json());
 app.use('/items', ItemsRoute);
 
 const mongoUrl = process.env.MONGO_URL!;
