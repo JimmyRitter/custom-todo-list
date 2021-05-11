@@ -1,9 +1,11 @@
 import express from 'express';
-import { getItems, getItem, createItem } from '../services/ItemService';
+import { getItems, getItem, createItem, updateItem } from '../services/ItemService';
+
 const router = express.Router();
 
 router.get('/', getItems);
 router.get('/:id', getItem);
 router.post('/create', createItem)
+router.put('/', updateItem);
 
 export default router;
