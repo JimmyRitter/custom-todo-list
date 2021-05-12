@@ -1,14 +1,13 @@
 import React from "react";
 import { AxiosRequestConfig } from "axios";
 import axios from 'axios';
-import ItemModel from "../types/item.d";
 import Item from './item.single';
 import ItemCreate from "./item.create";
+import ItemModel from "../types/item";
 
 export class ItemList extends React.Component<{}, { items: ItemModel[] }> {
     constructor(props: any) {
         super(props);
-        this.handleCreateItem.bind(this);
         this.state = {
             items: []
         }
@@ -27,9 +26,14 @@ export class ItemList extends React.Component<{}, { items: ItemModel[] }> {
 
     handleCreateItem = (newItem: ItemModel) => {
         this.setState({
-                items: [...this.state.items, newItem]
-            }
-        )
+            items: [...this.state.items, newItem]
+        });
+    }
+
+    handleDeleteItem = (id: string) => {
+        this.setState({
+            items: this.state.items.filter((x) => x._id !== id)
+        });
     }
 
     render() {
@@ -37,16 +41,23 @@ export class ItemList extends React.Component<{}, { items: ItemModel[] }> {
         return (
             <>
                 <h2>To do list:</h2>
-                {items.map((item: ItemModel) => (
+                {items.length > 0 && items.map((item: ItemModel) => (
                     <Item key={item._id}
                           _id={item._id}
                           name={item.name}
                           checked={item.checked}
+                          onDelete={(id: string) => this.handleDeleteItem(id)}
                     />
                 ))}
+                {items.length === 0 && (
+                    <>
+                        <i>The list is empty.</i>
+                        <br />
+                        <i>Start adding an item</i>
+                    </>
+                )}
                 <ItemCreate onCreateItem={(item: ItemModel) => this.handleCreateItem(item)} />
             </>
         )
     }
-
 }

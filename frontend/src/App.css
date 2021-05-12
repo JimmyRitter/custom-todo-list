@@ -3,6 +3,7 @@
   flex-direction: row;
   align-items: center;
   justify-content: center;
+  cursor: default;
 }
 
 .checked-item {
@@ -10,13 +11,9 @@
 }
 
 .remove-icon {
-  display: none;
+  cursor: pointer;
   max-height: 4%;
   max-width: 4%;
-}
-
-.item-row *:hover + .remove-icon {
-  display: block;
 }
 
 .App {
