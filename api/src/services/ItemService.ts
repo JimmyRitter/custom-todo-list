@@ -73,3 +73,20 @@ export const updateItem = (req: Request, res: Response) => {
             res.send(data);
         });
 }
+
+export const deleteItem = (req: Request, res: Response) => {
+    const db: Db = req.app.locals.mongoDBTodoList;
+
+    const itemId: string = req.params.id;
+
+    db.collection('items')
+        .deleteOne(
+            { "_id": new ObjectID(itemId) }
+        )
+        .then(() => {
+            const data: ItemDBResponseSuccess = {
+                ok: true,
+            }
+            res.send(data);
+        });
+}
