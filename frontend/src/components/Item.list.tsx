@@ -3,7 +3,7 @@ import { AxiosRequestConfig } from "axios";
 import axios from 'axios';
 import Item from './item.single';
 import ItemCreate from "./item.create";
-import ItemModel from "../types/item";
+import { ItemModel } from "../types/item";
 
 export class ItemList extends React.Component<{}, { items: ItemModel[] }> {
     constructor(props: any) {
@@ -32,8 +32,25 @@ export class ItemList extends React.Component<{}, { items: ItemModel[] }> {
 
     handleDeleteItem = (id: string) => {
         this.setState({
-            items: this.state.items.filter((x) => x._id !== id)
+            items: this.state.items.filter((x: ItemModel) => x._id !== id)
         });
+    }
+
+    handleClearCheckedItems = () => {
+        if (this.state.items.every((x: ItemModel) => !x.checked)) return false;
+
+        axios.post(`${this.baseUrl}/items/clear`)
+            .then((response: AxiosRequestConfig) => {
+                if (response.data.ok) {
+                    this.setState({
+                        items: this.state.items.filter((x: ItemModel) => !x.checked),
+                    });
+                }
+            });
+    }
+
+    handleItemChecked = (id: string, value: boolean) => {
+        this.state.items.find((x: ItemModel) => x._id === id)!.checked = value;
     }
 
     render() {
@@ -41,14 +58,26 @@ export class ItemList extends React.Component<{}, { items: ItemModel[] }> {
         return (
             <>
                 <h2>To do list:</h2>
-                {items.length > 0 && items.map((item: ItemModel) => (
-                    <Item key={item._id}
-                          _id={item._id}
-                          name={item.name}
-                          checked={item.checked}
-                          onDelete={(id: string) => this.handleDeleteItem(id)}
-                    />
-                ))}
+                {items.length > 0 && (
+                    <>
+                        {items.map((item: ItemModel) => (
+                            <Item key={item._id}
+                                  _id={item._id}
+                                  name={item.name}
+                                  checked={item.checked}
+                                  onCheck={(id, value) => this.handleItemChecked(id, value)}
+                                  onDelete={(id: string) => this.handleDeleteItem(id)}
+                            />
+                        ))}
+                        <button onClick={this.handleClearCheckedItems}
+                                type={'button'}>
+                            Clear marked items
+                        </button>
+                    </>
+
+                )}
+
+
                 {items.length === 0 && (
                     <>
                         <i>The list is empty.</i>

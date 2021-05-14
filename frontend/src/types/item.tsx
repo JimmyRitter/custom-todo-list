@@ -1,8 +1,10 @@
-declare interface ItemModel {
+export declare interface ItemModel {
     _id: string;
     name: string;
     checked: boolean;
-    onDelete?: (id: string) => void;
 }
 
-export default ItemModel;
+export declare interface ItemActions {
+    onCheck?: (id: string, value: boolean) => void;
+    onDelete?: (id: string) => void;
+}

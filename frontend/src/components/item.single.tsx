@@ -1,15 +1,16 @@
 import React, { useState } from 'react';
-import ItemModel from "../types/item";
+import { ItemModel, ItemActions } from "../types/item";
 import icon from '../assets/icons/delete-white.svg';
 import axios, { AxiosRequestConfig } from "axios";
 
-const Item = ({ _id, name, checked, onDelete }: ItemModel) => {
+const Item = ({ _id, name, checked, onCheck, onDelete }: ItemModel & ItemActions) => {
     const [stateChecked, setStateChecked] = useState(checked);
 
     const baseUrl = process.env.REACT_APP_API_BASE_URL;
 
     const onChangeCheckbox = (value: boolean) => {
         setStateChecked(value);
+        onCheck!(_id, value);
 
         const item: ItemModel = {
             _id: _id,
@@ -20,6 +21,8 @@ const Item = ({ _id, name, checked, onDelete }: ItemModel) => {
         axios.put(`${baseUrl}/items`, { item })
             .then((response: AxiosRequestConfig) => {
                 if (!response.data.ok) {
+                    // rollback
+                    onCheck!(_id, !value);
                     setStateChecked(!value);
                 }
             });

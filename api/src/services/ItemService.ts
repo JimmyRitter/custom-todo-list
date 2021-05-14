@@ -90,3 +90,18 @@ export const deleteItem = (req: Request, res: Response) => {
             res.send(data);
         });
 }
+
+export const clearChecked = (req: Request, res: Response) => {
+    const db: Db = req.app.locals.mongoDBTodoList;
+
+    db.collection('items')
+        .deleteMany(
+            { checked: true }
+        )
+        .then(() => {
+            const data: ItemDBResponseSuccess = {
+                ok: true,
+            }
+            res.send(data);
+        });
+}
