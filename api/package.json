@@ -8,7 +8,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "yarn lint && export NODE_ENV=development && nodemon src/app.ts",
     "build": "export NODE_ENV=production && tsc --project ./",
-    "lint": "yarn eslint . --ext .js,.jsx,.ts,.tsx"
+    "lint": "yarn eslint . --ext .ts,.tsx"
   },
   "keywords": [],
   "author": "",
