@@ -1,1 +1,1 @@
-export { default as ItemsRoute } from "./items-route";
+export { default } from './items-route';

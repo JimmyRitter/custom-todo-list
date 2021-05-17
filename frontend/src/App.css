@@ -10,10 +10,16 @@
   text-decoration: line-through;
 }
 
-.remove-icon {
+.remove-icon-button {
+  border: none;
+  background-color: transparent;
+  max-width: 1%;
+}
+
+.remove-icon-button img {
   cursor: pointer;
-  max-height: 4%;
-  max-width: 4%;
+  max-height: 18px;
+  background-image: url("assets/icons/delete-white.svg");
 }
 
 .App {

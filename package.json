@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "yarn workspace api start & yarn workspace frontend start",
-    "build-ui": "yarn workspace frontend build"
+    "build-ui": "yarn workspace frontend build",
+    "lint": "yarn workspace api lint & yarn workspace frontend lint"
   },
   "keywords": [],
   "author": "",
